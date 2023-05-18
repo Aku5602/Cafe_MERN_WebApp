@@ -10,7 +10,7 @@ const port = 3001;
 
 //To register middleware
 app.use(cors({
-  origin:["http://localhost:3000","https://Cafe_WebApp1.onrender.com"]
+  origin:["https://preeminent-yeot-55f07f.netlify.app","https://Cafe_WebApp1.onrender.com"]
 })) 
 app.use(express.json());
 
