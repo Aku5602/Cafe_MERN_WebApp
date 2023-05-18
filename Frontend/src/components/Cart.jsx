@@ -11,7 +11,7 @@ const Cart = () => {
   let flag2=0;
   let flag=0;
   useEffect(() => {
-    fetch("http://localhost:3001/cartItems")
+    fetch("https://cafe-webapp1.onrender.com/cartItems")
       .then((res) => res.json())
       .then((data) => {
         cartList = data;
@@ -40,7 +40,7 @@ const Cart = () => {
     }
     // console.log(JSON.stringify(props.card));
 
-    fetch("http://localhost:3001/cartItem", {
+    fetch("https://cafe-webapp1.onrender.com/cartItem", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const Cart = () => {
   }
 
   async function addToOrder() {
-    fetch("http://localhost:3001/orderItem",{
+    fetch("https://cafe-webapp1.onrender.com/orderItem",{
             method:"POST"
           }).then(res=>res.json()).then(data=>{
             // console.log(data.requrl);

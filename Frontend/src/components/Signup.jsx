@@ -11,7 +11,7 @@ const Signup = () => {
     
     const onSubmit = async (data) => {
 
-        fetch("http://localhost:3001/register",{
+        fetch("https://cafe-webapp1.onrender.com/register",{
             method:"POST",
             headers: {
               "Content-Type": "application/json",

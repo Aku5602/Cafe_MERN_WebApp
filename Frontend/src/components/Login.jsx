@@ -11,7 +11,7 @@ const Login = () => {
     
     const onSubmit = async (data) => {
       //Post login data
-        fetch("http://localhost:3001/login",{
+        fetch("https://cafe-webapp1.onrender.com/login",{
             method:"POST",
             headers: {
               "Content-Type": "application/json",

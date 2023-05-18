@@ -8,7 +8,7 @@ const Header = () => {
   const [login,setLogin]=useState(0);
 
   async function loggingOut() {
-    fetch('http://localhost:3001/Logout').then((res)=>{return res.json()}).then((data)=>{if(data.email===null){
+    fetch('https://cafe-webapp1.onrender.com/Logout').then((res)=>{return res.json()}).then((data)=>{if(data.email===null){
       console.log(data);
       setLogin((login)=>login=0);
       // console.log("i am out ",login);
@@ -23,7 +23,7 @@ const Header = () => {
 
   useEffect(()=>{
   
-      fetch('http://localhost:3001/currentUser').then((res)=>{return res.json()}).then((data)=>{if(data.email===null){
+      fetch('https://cafe-webapp1.onrender.com/currentUser').then((res)=>{return res.json()}).then((data)=>{if(data.email===null){
         setLogin((login)=>0);
         // console.log("CurrentUser Absent",login);
       }

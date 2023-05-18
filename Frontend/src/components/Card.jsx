@@ -8,7 +8,7 @@ const Card = (props) => {
     //Add to Collection named Cart in MongoDB using Nodejs API and page should refresh on Cart Page;
     // const obj=props;
    // console.log(JSON.stringify(props.card));
-    fetch("http://localhost:3001/cartItem",{
+    fetch("https://cafe-webapp1.onrender.com/cartItem",{
             method:"POST",
             headers: {
               "Content-Type": "application/json",

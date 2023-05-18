@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
    
     
-      fetch("http://localhost:3001/productItems").then((res)=>res.json()).then((data)=>{Menu=data; setMenuItems(Menu); }).catch((err)=>{console.log("Some error")});
+      fetch("https://cafe-webapp1.onrender.com/productItems").then((res)=>res.json()).then((data)=>{Menu=data; setMenuItems(Menu); }).catch((err)=>{console.log("Some error")});
   
  
   },[]);

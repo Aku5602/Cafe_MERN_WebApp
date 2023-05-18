@@ -9,7 +9,7 @@ const Order = () => {
   let flag=0;
   useEffect(() => {
     console.log("Calling orderItems")
-    fetch("http://localhost:3001/orderItems")
+    fetch("https://cafe-webapp1.onrender.com/orderItems")
       .then((res) => res.json())
       .then((data) => {
         orderList = data;
@@ -29,7 +29,7 @@ const Order = () => {
 
   async function removeFromOrder() {
 
-      fetch("http://localhost:3001/orderItem",{
+      fetch("https://cafe-webapp1.onrender.com/orderItem",{
         method:"DELETE"
       }).catch((err)=>{
         console.log(err);  
