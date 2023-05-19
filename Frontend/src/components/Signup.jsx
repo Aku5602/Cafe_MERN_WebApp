@@ -18,7 +18,9 @@ const Signup = () => {
             },
             body:JSON.stringify(data),
           }).then(res=>res.json()).then(data=>{
-            console.log(data.requrl);
+            console.log(data);
+            if(data.message) 
+            return navigate("/Login")
             if(data.requrl)
             return navigate("/");
            }).catch((err)=>{
