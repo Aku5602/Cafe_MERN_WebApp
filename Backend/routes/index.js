@@ -56,7 +56,7 @@ router.delete("/orderItem",deleteOldOrder);
 
 router.post("/orderItem", async (request, response) => {
     //Add to orderItems the booked order
-    response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    response.set('Access-Control-Allow-Origin', 'https://preeminent-yeot-55f07f.netlify.app');
 
     const currentUser = await Login.findOne();
 
@@ -168,7 +168,7 @@ router.put("/cartItem", myHandler);
 
 router.post("/cartItem", async (request, response) => {
     //Add to cartItems else modify the cart Item
-    response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    response.set('Access-Control-Allow-Origin', 'https://preeminent-yeot-55f07f.netlify.app');
 
     const currentUser = await Login.findOne();
 
@@ -226,7 +226,7 @@ router.get("/productItems", async (request, response) => {
 
 router.post("/productItems", async (request, response) => {
     //To add new products in 
-    response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    response.set('Access-Control-Allow-Origin', 'https://preeminent-yeot-55f07f.netlify.app');
     //console.log(request.body);
     const userDB = await Product.find({ "name": request.body.name });
     console.log(userDB);
@@ -266,7 +266,7 @@ router.post("/productItems", async (request, response) => {
 });
 
 router.post('/login', async (request, response) => {
-    response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    response.set('Access-Control-Allow-Origin', 'https://preeminent-yeot-55f07f.netlify.app');
     //After registration post take details
     const obj = {}
     obj.email = request.body.email;
@@ -308,7 +308,7 @@ router.post('/login', async (request, response) => {
 });
 
 router.post('/register', async (request, response) => {
-    response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    response.set('Access-Control-Allow-Origin', 'https://preeminent-yeot-55f07f.netlify.app');
     //After registration post take details
     const obj = { name: '', email: '', password: '', phone: '', address: '' };
     obj.name = request.body.name;
