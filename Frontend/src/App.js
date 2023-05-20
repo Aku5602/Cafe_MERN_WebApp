@@ -1,7 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
 
-
 import HomePage from './routes/HomePage';
 import LoginPage from "./routes/LoginPage"
 import SignupPage from './routes/SignupPage'
