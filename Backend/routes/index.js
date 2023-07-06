@@ -18,15 +18,11 @@ const router = Router();
 router.get("/Logout", async (request, response) => {
     const LoginUser = await Login.findOne();
     const updateUser= await Login.updateOne({},{$set: {'email':null}})
-    // console.log(LoginUser.email);
-    // response.send("hi");
     response.send(JSON.stringify({ "email": null }));
 })
 
 router.get("/currentUser", async (request, response) => {
     const LoginUser = await Login.findOne()
-    // console.log(LoginUser.email);
-    // response.send("hi");
     response.send(JSON.stringify({ "email": LoginUser.email }));
 })
 
@@ -42,9 +38,7 @@ router.get("/orderItems",async (request, response)=>{
 async function deleteOldOrder(request,response) {
     const currentUser = await Login.findOne();
     const prevOrderDB = await Order.find({ "email": currentUser.email });
-    const success=await Order.deleteMany({ "email": currentUser.email }).then((res) => {
-        console.log("Deleted many documents from Previous Order:\n",res);
-    });
+    const success=await Order.deleteMany({ "email": currentUser.email });
    
     if(request.body) {
         return;
@@ -59,11 +53,6 @@ router.post("/orderItem", async (request, response) => {
     // response.set('Access-Control-Allow-Origin', 'https://preeminent-yeot-55f07f.netlify.app');
 
     const currentUser = await Login.findOne();
-
-    // currentUser=await currentUser.json();
-    console.log(currentUser.email);
-
-
     if (!currentUser.email) {
 
         const obj = {
@@ -76,10 +65,7 @@ router.post("/orderItem", async (request, response) => {
     }
     else {
         const userDB = await Cart.find({ "email": currentUser.email });
-        // const prevOrderDB = await Order.find({ "email": currentUser.email });
-        //  console.log(userDB[0]);
         const deletedPrevOrder=await deleteOldOrder(request,response);
-        console.log(userDB);
         userDB.map(async (element)=>{
             const obj = { email: '', pid: '', image: '', name: '', category: '', price: '', quantity: '' }
             obj.email = currentUser.email;
@@ -90,17 +76,11 @@ router.post("/orderItem", async (request, response) => {
             obj.price = element.price;
             obj.quantity = element.quantity;
 
-            const newOrderItem = await Order.create(obj).then((res) => {
-                console.log("NewOrder item ",element.pid," created\n");
-            });
+            const newOrderItem = await Order.create(obj);
 
-            const deleteCartItem=await Cart.deleteOne(element).then((res) => {
-                console.log("Delete from Cart:\n",res);
-            });
+            const deleteCartItem=await Cart.deleteOne(element);
         })
-            // console.log(obj);
           
-            // newCartItem.save();
             response.sendStatus(201);
         
     }
@@ -123,33 +103,18 @@ router.get("/cartItems",cartGet);
 async function myHandler(request, response) {
     //To update existing cartItem present in Cart
     const currentUser = await Login.findOne();
-    // console.log(request.body);
     const userDB = await Cart.find({ $and: [{ "name": request.body.name }, { "email": currentUser.email }] });
     const originalDB = await Product.find({ "name": request.body.name });
-    //  console.log(userDB,originalDB);
-    // response.sendStatus(200);
 
     if (userDB) {
-        console.log(request.body.minus);
         if(request.body.minus<=0) {
-            await Cart.deleteOne({ "name": request.body.name, "email": currentUser.email }).then(res => console.log(res)).catch((err) => {
-                console.log(err);
-            });
-            // response.send(JSON.stringify(request.body));
-
-
+            await Cart.deleteOne({ "name": request.body.name, "email": currentUser.email });
         }
         else if (request.body.minus==1) {
-            await Cart.updateOne({ "name": request.body.name, "email": currentUser.email }, { $set: { "price": (userDB[0].quantity - 1) * +(originalDB[0].price.slice(0, originalDB[0].price.length - 1)), "quantity": userDB[0].quantity - 1 } }).then(res => console.log(res)).catch((err) => {
-                console.log(err);
-            });
-            // response.send(JSON.stringify(request.body));
+            await Cart.updateOne({ "name": request.body.name, "email": currentUser.email }, { $set: { "price": (userDB[0].quantity - 1) * +(originalDB[0].price.slice(0, originalDB[0].price.length - 1)), "quantity": userDB[0].quantity - 1 } });
         }
         else {
-            await Cart.updateOne({ "name": request.body.name, "email": currentUser.email }, { $set: { "price": (userDB[0].quantity + 1) * +(originalDB[0].price.slice(0, originalDB[0].price.length - 1)), "quantity": userDB[0].quantity + 1 } }).then(res => console.log(res)).catch((err) => {
-                console.log(err);
-            });
-            // response.sendStatus(200);
+            await Cart.updateOne({ "name": request.body.name, "email": currentUser.email }, { $set: { "price": (userDB[0].quantity + 1) * +(originalDB[0].price.slice(0, originalDB[0].price.length - 1)), "quantity": userDB[0].quantity + 1 } });
         }
         
         
@@ -160,7 +125,6 @@ async function myHandler(request, response) {
         response.sendStatus(400);
     }
 
-    // 
 
 }
 
@@ -172,8 +136,6 @@ router.post("/cartItem", async (request, response) => {
 
     const currentUser = await Login.findOne();
 
-    // currentUser=await currentUser.json();
-    console.log(currentUser.email);
 
 
     if (!currentUser.email) {
@@ -188,12 +150,9 @@ router.post("/cartItem", async (request, response) => {
     }
     else {
         const userDB = await Cart.find({ $and: [{ "name": request.body.name }, { "email": currentUser.email }] });
-        //  console.log(userDB[0]);
 
         if (userDB[0]) {
-            // console.log(request.body.name,currentUser.email);
             return myHandler(request, response);
-            // response.send(JSON.stringify(userDB));
         }
         else {
             const obj = { email: '', pid: '', image: '', name: '', category: '', price: '', quantity: '' }
@@ -204,11 +163,7 @@ router.post("/cartItem", async (request, response) => {
             obj.category = request.body.category;
             obj.price = request.body.price.slice(0, request.body.price.length - 1);
             obj.quantity = 1;
-            // console.log(obj);
-            const newCartItem = await Cart.create(obj).then((res) => {
-                console.log(res);
-            });
-            // newCartItem.save();
+            const newCartItem = await Cart.create(obj);
             response.sendStatus(201);
         }
     }
@@ -219,15 +174,13 @@ router.post("/cartItem", async (request, response) => {
 
 router.get("/productItems", async (request, response) => {
     const userDB = await Product.find({});
-    console.log(JSON.stringify(userDB));
     response.send(JSON.stringify(userDB));
-    //  console.log(JSON.stringify(userDB));
+   
 });
 
 router.post("/productItems", async (request, response) => {
     //To add new products in 
     // response.set('Access-Control-Allow-Origin', 'https://preeminent-yeot-55f07f.netlify.app');
-    //console.log(request.body);
     const userDB = await Product.find({ "name": request.body.name });
     console.log(userDB);
  
@@ -278,12 +231,8 @@ router.post('/login', async (request, response) => {
     const userDB = await Customer.findOne({ "email": obj.email });
 
     if (userDB && userDB.password === obj.password) {
-        // console.log(request.body);
-        const UserLogin = await Login.updateOne({}, { $set: { 'email': obj.email } }).then((res) => {
-            console.log(res);
-        });
+        const UserLogin = await Login.updateOne({}, { $set: { 'email': obj.email } });
         const change=await Login.findOne();
-        // console.log(change);
         //Navigate to Homepage
 
         const obj1 = {
@@ -318,9 +267,7 @@ router.post('/register', async (request, response) => {
     obj.address = request.body.address;
     //Check if user exits  else create new user
     const userDB = await Customer.findOne({ "email": obj.email });
-    // console.log(userDB);
     if (userDB) {
-        console.log(request.body);
         const nsucceed = {
             "message": "Already Registered",
             "status": "200",
@@ -334,9 +281,7 @@ router.post('/register', async (request, response) => {
         const newUser = await Customer.create(obj);
         newUser.save();
 
-        const UserLogin = await Login.updateOne({}, { $set: { 'email': obj.email } }).then((res) => {
-            console.log(res);
-        });
+        const UserLogin = await Login.updateOne({}, { $set: { 'email': obj.email } });
 
 
         const succeed = { 
