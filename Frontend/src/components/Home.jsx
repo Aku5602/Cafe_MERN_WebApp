@@ -45,13 +45,13 @@ const Home = () => {
   return (
     <>
     
-      <HomeHeader filterItem={filterItem} menuList={uniqueList} />
+      {!loading && <HomeHeader filterItem={filterItem} menuList={uniqueList} />}
       {loading && <h1>Loading...</h1>}
-      <section className="main-card--cointainer">
+      {!loading &&  <section className="main-card--cointainer">
         {menuItems.map((element) => (
           <Card key={element.pid} card={element}/>
         ))}
-      </section>
+      </section> }
     </>
   );
 };
