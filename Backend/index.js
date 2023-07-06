@@ -9,9 +9,7 @@ const path = require("path");
 const port = 3001;
 
 //To register middleware
-app.use(cors({
-  origin: ["https://preeminent-yeot-55f07f.netlify.app", "https://64671a23d4042f4ae816adde--preeminent-yeot-55f07f.netlify.app", "https://Cafe_WebApp1.onrender.com"],
-}))
+app.use(cors())
 app.use(express.json());
 
 require("./database/conn.js");
