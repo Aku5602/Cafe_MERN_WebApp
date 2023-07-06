@@ -8,11 +8,12 @@ let Menu=[{}];
 const Home = () => {
 
     const [menuItems, setMenuItems] = useState(Menu);
+    const [loading,setLoading] = useState(false);
   // console.log(menuItems);
   useEffect(() => {
    
-    
-      fetch("https://cafe-webapp1.onrender.com/productItems").then((res)=>res.json()).then((data)=>{Menu=data; setMenuItems(Menu); }).catch((err)=>{console.log("Some error")});
+    setLoading(true);
+    fetch("https://cafe-webapp1.onrender.com/productItems").then((res)=>res.json()).then((data)=>{Menu=data; setMenuItems(Menu); setLoading(false); }).catch((err)=>{console.log("Some error")});
   
  
   },[]);
@@ -45,6 +46,7 @@ const Home = () => {
     <>
     
       <HomeHeader filterItem={filterItem} menuList={uniqueList} />
+      {loading && <h1>Loading...</h1>}
       <section className="main-card--cointainer">
         {menuItems.map((element) => (
           <Card key={element.pid} card={element}/>
