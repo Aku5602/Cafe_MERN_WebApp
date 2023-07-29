@@ -25,22 +25,22 @@ const Footer = () => {
           <h3>Contact Us</h3>
           <ul>
             <li>
-              <FaPhoneAlt /> +1 (555) 123-4567
+              <FaPhoneAlt /> +919594626402
             </li>
             <li>
-              <FaPhoneAlt /> +1 (555) 987-6543
+              <FaPhoneAlt /> +917219429480
             </li>
             <li>
-              <IoLogoWhatsapp /> +1 (555) 555-5555
+              <IoLogoWhatsapp /> +919594626402
             </li>
             <li>
-              <FaEnvelope /> info@foodordering.com
+              <FaEnvelope /> info@foodorderin.com
             </li>
             <li>
               <FaEnvelope /> support@foodordering.com
             </li>
             <li>
-              <FaMapMarkerAlt /> 123 Main St, Anytown, USA
+              <FaMapMarkerAlt /> nigdi,pune
             </li>
           </ul>
         </div>
@@ -60,16 +60,12 @@ const Footer = () => {
       <div className="footer-section">
         <h3>About Us</h3>
         <p>
-          We are a food ordering website that allows you to order your favorite
-          meals from your favorite restaurants and have them delivered to your
-          doorstep. Our mission is to make food ordering easy, fast, and
-          convenient for everyone.
+         Welcome to our food ordering app, the ultimate solution for ordering your favorite meals from a diverse menu. Our mission is to provide a seamless, fast, and convenient food ordering experience for everyone, so you can indulge in your desired dishes with ease.
         </p>
       </div>
       <div className="footer-section">
           <p style={{textAlign:"center"}}>
-            Copyright 1999-2023 by Refsnes Data. All Rights Reserved. W3Schools
-            is Powered by W3.CSS.
+            Copyright 2023-24  by Food Orderding System. All Rights Reserve.
           </p>
         </div>
     </footer>
