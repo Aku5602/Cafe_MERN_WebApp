@@ -65,7 +65,7 @@ const Footer = () => {
       </div>
       <div className="footer-section">
           <p style={{textAlign:"center"}}>
-            Copyright 2023-24  by Food Orderding System. All Rights Reserve.
+            Copyright 2023-24  by Food Orderding System. All Rights Reserved.
           </p>
         </div>
     </footer>
