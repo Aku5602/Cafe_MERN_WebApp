@@ -6,7 +6,7 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 
-const port = 3001;
+const port = 80;
 
 //To register middleware
 app.use(cors())
