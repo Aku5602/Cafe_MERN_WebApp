@@ -5,6 +5,7 @@ const index = require("./routes/index.js");
 const app = express();
 const cors = require("cors");
 const path = require("path");
+const cron = require("node-cron");
 
 const port = 80;
 
@@ -15,6 +16,9 @@ app.use(express.json());
 require("./database/conn.js");
 
 app.use(index);
+cron.schedule('* * * * *', () => { 
+  // console.log("Hello");
+});
 // app.use(connection);
 
 app.listen(port, (err) => {
