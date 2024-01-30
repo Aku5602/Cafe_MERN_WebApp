@@ -7,7 +7,7 @@ const cors = require("cors");
 const path = require("path");
 const cron = require("node-cron");
 
-const port = 80;
+// const port = 80;
 
 //To register middleware
 app.use(cors())
@@ -21,7 +21,7 @@ cron.schedule('* * * * *', () => {
 });
 // app.use(connection);
 
-app.listen(port, (err) => {
+app.listen(process.env.PORT, (err) => {
   if (err) throw "Error";
-  console.log("Listening to port ", port);
+  console.log("Listening to port ", process.env.PORT);
 });
