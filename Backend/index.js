@@ -1,5 +1,5 @@
 // import "./database/conn.mjs";
-
+require('dotenv').config(); 
 const express = require('express');
 const index = require("./routes/index.js");
 const app = express();
@@ -7,7 +7,6 @@ const cors = require("cors");
 const path = require("path");
 const cron = require("node-cron");
 
-// const port = 80;
 
 //To register middleware
 app.use(cors())
@@ -21,7 +20,7 @@ cron.schedule('* * * * *', () => {
 });
 // app.use(connection);
 
-app.listen(process.env.PORT, (err) => {
+app.listen(+process.env.PORT, (err) => {
   if (err) throw "Error";
   console.log("Listening to port ", process.env.PORT);
 });
